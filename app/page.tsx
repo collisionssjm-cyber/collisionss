@@ -91,7 +91,7 @@ export default function Page() {
           </h1>
           <p className="mt-6 text-lg text-slate-700 max-w-2xl mx-auto">
             Collision SS audits collision estimates and damage photos to uncover missed labor,
-            incorrect repair-vs-replace decisions, undocumented operations, and required OEM procedures —
+            incorrect repair‑vs‑replace decisions, undocumented operations, and required OEM procedures —
             before you approve the repair.
           </p>
           <div className="mt-8">
@@ -120,7 +120,7 @@ export default function Page() {
             <div className="bg-white border rounded-2xl p-6">
               <h3 className="font-semibold text-lg">Missing Operations</h3>
               <p className="mt-3 text-slate-600 text-sm">
-                Blend time, R&I procedures, corrosion protection, setup & measure, one-time-use parts.
+                Blend time, R&I procedures, corrosion protection, setup & measure, one‑time‑use parts.
               </p>
             </div>
             <div className="bg-white border rounded-2xl p-6">
@@ -145,7 +145,7 @@ export default function Page() {
               href="#start"
               className="inline-flex items-center justify-center border border-slate-900 text-slate-900 px-8 py-3 rounded-2xl text-base"
             >
-              Request Post-Repair Review
+              Request Post‑Repair Review
             </a>
           </div>
         </div>
