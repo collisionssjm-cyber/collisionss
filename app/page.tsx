@@ -18,57 +18,45 @@ export default function Page() {
         </div>
       </header>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden py-28">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 -z-30 bg-cover bg-center"
-          style={{ backgroundImage: "url('/hero-bg.png')" }}
-        />
+{/* HERO */}
+<section className="relative overflow-hidden py-32 text-white">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 -z-20 bg-cover bg-center"
+    style={{ backgroundImage: "url('/hero-bg.png')" }}
+  />
 
-        {/* Lift the image (so it actually shows) */}
-        <div className="absolute inset-0 -z-20 bg-white/55" />
+  {/* Dark Overlay for Premium Feel */}
+  <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-900/80 via-slate-900/70 to-blue-900/70" />
 
-        {/* Subtle blue edge lighting for “high-end” look */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-600/20 via-transparent to-indigo-600/20" />
+  <div className="mx-auto max-w-5xl px-6 text-center">
+    <h1 className="text-4xl font-extrabold leading-tight sm:text-6xl">
+      The insurance companies are already rich.
+      <span className="block text-blue-400">
+        The shops are paid.
+      </span>
+      <span className="block">
+        You’re left questioning the bill.
+      </span>
+    </h1>
 
-        {/* Vignette (very light, not a blackout) */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-950/10 via-transparent to-slate-950/15" />
+    <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-200">
+      Collision SS audits estimates, damage photos, and final invoices
+      to uncover repair-vs-replace issues, missing operations,
+      and OEM requirements — before and after the repair.
+    </p>
 
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          {/* Glass card to keep text readable while still showing background */}
-          <div className="rounded-3xl border border-white/30 bg-white/35 p-10 shadow-2xl backdrop-blur-xl sm:p-14">
-            <h1 className="text-4xl font-extrabold leading-tight sm:text-6xl">
-              The insurance companies are already rich.
-              <span className="block text-blue-700">The shops are getting paid.</span>
-              <span className="block text-slate-900">
-                You’re left scratching your head.
-              </span>
-            </h1>
+    <div className="mt-10">
+      <a
+        href="#start"
+        className="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700"
+      >
+        Start an Audit
+      </a>
+    </div>
+  </div>
+</section>
 
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-700">
-              Collision SS audits collision estimates, damage photos, and final invoices to uncover
-              missed operations, improper repair decisions, and undocumented OEM requirements.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="#start"
-                className="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700"
-              >
-                Start an Audit
-              </a>
-
-              <a
-                href="#what"
-                className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white/70 px-8 py-4 text-lg font-semibold text-slate-900 transition hover:bg-white"
-              >
-                What We Catch
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* WHAT WE CATCH */}
       <section id="what" className="bg-white py-24">
