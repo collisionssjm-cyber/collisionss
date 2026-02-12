@@ -26,30 +26,30 @@ export default function Page() {
     style={{ backgroundImage: "url('/hero-bg.png')" }}
   />
 
-  {/* Dark Overlay for Premium Feel */}
-  <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-900/80 via-slate-900/70 to-blue-900/70" />
+  {/* Strong Premium Overlay */}
+  <div className="absolute inset-0 -z-10 bg-slate-900/85" />
 
   <div className="mx-auto max-w-5xl px-6 text-center">
-    <h1 className="text-4xl font-extrabold leading-tight sm:text-6xl">
+    <h1 className="text-4xl font-extrabold leading-tight sm:text-6xl tracking-tight">
       The insurance companies are already rich.
-      <span className="block text-blue-400">
+      <span className="block text-blue-500 mt-2">
         The shops are paid.
       </span>
-      <span className="block">
+      <span className="block mt-2 text-white">
         You’re left questioning the bill.
       </span>
     </h1>
 
-    <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-200">
+    <p className="mx-auto mt-8 max-w-2xl text-lg text-slate-300">
       Collision SS audits estimates, damage photos, and final invoices
-      to uncover repair-vs-replace issues, missing operations,
-      and OEM requirements — before and after the repair.
+      to uncover repair-vs-replace errors, missing operations,
+      and required OEM procedures — before and after the repair.
     </p>
 
-    <div className="mt-10">
+    <div className="mt-12">
       <a
         href="#start"
-        className="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700"
+        className="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-12 py-5 text-lg font-semibold text-white shadow-2xl transition hover:bg-blue-700"
       >
         Start an Audit
       </a>
