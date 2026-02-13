@@ -153,7 +153,7 @@ export default function Page() {
 
               <div className="mt-8">
                 <a
-                  href="mailto:collisionss@yourdomain.com?subject=%241%20Quick%20Question%20-%20Collision%20SS&body=Type%20your%20question%20here:%0A%0A(Attach%20photos%20or%20estimate%20if%20needed)%0A%0AName:%0APhone:%0ARole:%20(vehicle%20owner%20/%20shop%20/%20dealer)%0A"
+                  href="mailto:Joseph.Marino@collisionss.com?subject=%241%20Quick%20Question%20-%20Collision%20SS&body=Type%20your%20question%20here:%0A%0A(Attach%20photos%20or%20estimate%20if%20needed)%0A%0AName:%0APhone:%0ARole:%20(vehicle%20owner%20/%20shop%20/%20dealer)%0A"
                   className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white px-8 py-3 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
                 >
                   Email a $1 Question
@@ -203,7 +203,7 @@ export default function Page() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a
-                href="mailto:collisionss@yourdomain.com?subject=Collision%20SS%20Audit%20Request%20-%20%2449&body=Name:%0A%0APhone:%0A%0AVehicle%20Year/Make/Model:%0A%0AInsurer:%0A%0AClaim%20%23:%0A%0AWhat%20happened:%0A%0A(Attach%20estimate%20PDF%20and%20photos)%0A"
+                href="mailto:Joseph.Marino@collisionss.com?subject=Collision%20SS%20Audit%20Request%20-%20%2449&body=Name:%0A%0APhone:%0A%0AVehicle%20Year/Make/Model:%0A%0AInsurer:%0A%0AClaim%20%23:%0A%0AWhat%20happened:%0A%0A(Attach%20estimate%20PDF%20and%20photos)%0A"
                 className="inline-flex items-center justify-center rounded-2xl bg-blue-700 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-800"
               >
                 Email Your $49 Audit Request
