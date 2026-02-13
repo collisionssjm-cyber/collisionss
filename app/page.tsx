@@ -163,6 +163,72 @@ export default function Page() {
         </div>
       </section>
 
+{/* $1 QUICK QUESTION */}
+<section className="bg-white py-16 sm:py-20">
+  <div className="mx-auto max-w-6xl px-6">
+    <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-10 shadow-sm">
+      <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm">
+          <span className="h-2 w-2 rounded-full bg-blue-700" />
+          FAST ANSWERS — LAUNCH MODE
+        </div>
+
+        <h2 className="mt-6 text-3xl font-extrabold text-slate-900">
+          $1 Quick Question
+        </h2>
+
+        <p className="mx-auto mt-4 max-w-3xl text-slate-600">
+          One quick question. One direct answer. Perfect when you’re stuck, unsure, or don’t want to get
+          played. For vehicle owners, shops, and dealership service teams.
+        </p>
+
+        <div className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-6 text-left md:grid-cols-3">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6">
+            <div className="text-sm font-bold text-slate-900">Vehicle owners</div>
+            <div className="mt-2 text-sm text-slate-600">
+              “Is this estimate missing anything?” “Should this be repair or replace?” “Do I need scans?”
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6">
+            <div className="text-sm font-bold text-slate-900">Shops</div>
+            <div className="mt-2 text-sm text-slate-600">
+              “How do I justify this op?” “What’s the clean line note?” “What’s commonly missed here?”
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6">
+            <div className="text-sm font-bold text-slate-900">Service managers</div>
+            <div className="mt-2 text-sm text-slate-600">
+              “Is this ADAS-related?” “What should I document?” “What do I tell the customer?”
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="mailto:collisionss@yourdomain.com?subject=%241%20Quick%20Question%20-%20Collision%20SS&body=Type%20your%20question%20here:%0A%0A(Attach%20photos%20or%20estimate%20if%20needed)%0A%0AName:%0APhone:%0ARole:%20(vehicle%20owner%20/%20shop%20/%20dealer)%0A"
+            className="inline-flex items-center justify-center rounded-2xl bg-blue-700 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-800"
+          >
+            Ask a $1 Question
+          </a>
+
+          <a
+            href="#start"
+            className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
+          >
+            Start an Audit
+          </a>
+        </div>
+
+        <p className="mx-auto mt-4 max-w-3xl text-xs text-slate-500">
+          Launch note: Payment automation is being finalized. For now, submit by email and we’ll reply with next steps.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* START */}
       <section id="start" className="py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-6">
