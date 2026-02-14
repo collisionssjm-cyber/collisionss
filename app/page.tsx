@@ -19,25 +19,26 @@ export default function Page() {
         </div>
       </header>
 
-  {/* HERO */}
+{/* HERO */}
 <section className="relative overflow-hidden py-36 text-center">
 
   {/* Background Image */}
   <div className="absolute inset-0">
     <img
-      src="https://images.unsplash.com/photo-1617654112368-307921291f42?auto=format&fit=crop&w=2000&q=80"
+      src="/hero.jpg"  // or your Unsplash link if still using it
       alt="Luxury supercar with custom wet paint"
-      className="h-full w-full object-cover"
+      className="h-full w-full object-cover brightness-110 contrast-110"
     />
-    <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900/90 to-blue-950/90" />
-    <div className="absolute inset-0 bg-black/60" />
+
+    {/* Blue glass overlay (lighter, premium) */}
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-slate-900/40 to-slate-950/60" />
   </div>
 
   {/* Content */}
   <div className="relative mx-auto max-w-4xl px-6 text-white">
-    <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl drop-shadow-xl">
+    <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl drop-shadow-lg">
       Before You Approve the Repair,
-      <span className="block text-blue-400">
+      <span className="block text-blue-300">
         Verify the Documentation.
       </span>
     </h1>
@@ -51,14 +52,14 @@ export default function Page() {
     <div className="mt-12 flex justify-center gap-6 flex-wrap">
       <a
         href="#audit"
-        className="rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-2xl hover:bg-blue-500 transition"
+        className="rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-xl hover:bg-blue-500 transition"
       >
         Full Audit – $49
       </a>
 
       <a
         href="#question"
-        className="rounded-2xl border border-slate-400 px-10 py-4 text-lg font-semibold hover:border-blue-400 hover:text-blue-400 transition"
+        className="rounded-2xl border border-white/60 px-10 py-4 text-lg font-semibold hover:border-blue-300 hover:text-blue-300 transition"
       >
         $1 Quick Question
       </a>
@@ -66,6 +67,8 @@ export default function Page() {
   </div>
 
 </section>
+
+
 
       {/* WHAT WE IDENTIFY */}
       <section className="bg-slate-900 py-24">
