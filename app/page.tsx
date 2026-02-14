@@ -27,7 +27,7 @@ export default function Page() {
     <img
       src="/hero.jpg"  // or your Unsplash link if still using it
       alt="Luxury supercar with custom wet paint"
-      className="h-full w-full object-cover brightness-110 contrast-110"
+    className="h-full w-full object-cover brightness-125 contrast-105"
     />
 
     {/* Blue glass overlay (lighter, premium) */}
