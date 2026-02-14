@@ -19,43 +19,53 @@ export default function Page() {
         </div>
       </header>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden py-32 text-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-slate-950 opacity-90" />
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-blue-600 blur-3xl opacity-20" />
-        <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-slate-600 blur-3xl opacity-20" />
+  {/* HERO */}
+<section className="relative overflow-hidden py-36 text-center">
 
-        <div className="relative mx-auto max-w-4xl px-6">
-          <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl">
-            Before You Approve the Repair,
-            <span className="block text-blue-400">
-              Verify the Documentation.
-            </span>
-          </h1>
+  {/* Background Image */}
+  <div className="absolute inset-0">
+    <img
+      src="https://images.unsplash.com/photo-1617654112368-307921291f42?auto=format&fit=crop&w=2000&q=80"
+      alt="Luxury supercar with custom wet paint"
+      className="h-full w-full object-cover"
+    />
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900/90 to-blue-950/90" />
+    <div className="absolute inset-0 bg-black/60" />
+  </div>
 
-          <p className="mx-auto mt-8 max-w-2xl text-lg text-slate-300">
-            Collision SS audits estimates, invoices, and damage photos to
-            identify missing operations, improper repair decisions, undocumented
-            OEM procedures, and ADAS requirements.
-          </p>
+  {/* Content */}
+  <div className="relative mx-auto max-w-4xl px-6 text-white">
+    <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl drop-shadow-xl">
+      Before You Approve the Repair,
+      <span className="block text-blue-400">
+        Verify the Documentation.
+      </span>
+    </h1>
 
-          <div className="mt-12 flex justify-center gap-6 flex-wrap">
-            <a
-              href="#audit"
-              className="rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-xl hover:bg-blue-500 transition"
-            >
-              Full Audit – $49
-            </a>
+    <p className="mx-auto mt-8 max-w-2xl text-lg text-slate-200">
+      Collision SS audits collision estimates, invoices, and damage photos to
+      identify missing operations, improper repair decisions, undocumented
+      OEM procedures, and ADAS requirements.
+    </p>
 
-            <a
-              href="#question"
-              className="rounded-2xl border border-slate-600 px-10 py-4 text-lg font-semibold hover:border-blue-500 hover:text-blue-400 transition"
-            >
-              $1 Quick Question
-            </a>
-          </div>
-        </div>
-      </section>
+    <div className="mt-12 flex justify-center gap-6 flex-wrap">
+      <a
+        href="#audit"
+        className="rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-2xl hover:bg-blue-500 transition"
+      >
+        Full Audit – $49
+      </a>
+
+      <a
+        href="#question"
+        className="rounded-2xl border border-slate-400 px-10 py-4 text-lg font-semibold hover:border-blue-400 hover:text-blue-400 transition"
+      >
+        $1 Quick Question
+      </a>
+    </div>
+  </div>
+
+</section>
 
       {/* WHAT WE IDENTIFY */}
       <section className="bg-slate-900 py-24">
