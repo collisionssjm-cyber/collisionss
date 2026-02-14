@@ -1,18 +1,18 @@
 export default function Page() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900">
+    <main className="min-h-screen bg-white text-slate-900">
+
       {/* HEADER */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="text-lg font-extrabold tracking-tight">
-            <span className="text-slate-900">Collision</span>{" "}
-            <span className="text-blue-700">SS</span>
+            <span>Collision</span>{" "}
+            <span className="text-blue-600">SS</span>
           </div>
 
-          {/* ONE PRIMARY CTA IN HEADER */}
           <a
-            href="#start"
-            className="rounded-xl bg-blue-700 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-blue-800"
+            href="#audit"
+            className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700 transition"
           >
             Start an Audit
           </a>
@@ -20,210 +20,199 @@ export default function Page() {
       </header>
 
       {/* HERO */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-blue-700" />
-            LAUNCH MODE — EMAIL INTAKE
-          </div>
-
-          <h1 className="mt-8 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-6xl">
-            The insurance companies are already rich.
-            <span className="block text-blue-800">Shops are compensated.</span>
-            <span className="block text-slate-800">You’re left questioning the bill.</span>
+      <section className="py-28 text-center">
+        <div className="mx-auto max-w-4xl px-6">
+          <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
+            Before You Approve the Repair,
+            <span className="block text-blue-600">
+              Verify the Documentation.
+            </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Collision SS audits collision estimates and damage photos to uncover missed labor,
-            incorrect repair-vs-replace decisions, undocumented operations, and required OEM procedures —
-            before you approve the repair.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
+            Collision SS audits collision repair estimates, invoices, and damage
+            photos to identify missed operations, improper repair-vs-replace
+            decisions, undocumented OEM procedures, and ADAS requirements.
           </p>
 
-          {/* ONE PRIMARY CTA IN HERO */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-500">
+            We don’t attack insurers. We don’t attack shops.
+            We analyze documentation.
+          </p>
+
+          <div className="mt-10 flex justify-center gap-4 flex-wrap">
             <a
-              href="#start"
-              className="inline-flex items-center justify-center rounded-2xl bg-blue-700 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-800"
+              href="#audit"
+              className="rounded-2xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white hover:bg-blue-700 transition"
             >
-              Start an Audit
+              Start Full Audit – $49
             </a>
+
             <a
-              href="#pricing"
-              className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
+              href="#question"
+              className="rounded-2xl border px-8 py-4 text-lg font-semibold hover:bg-slate-50 transition"
             >
-              Pricing
+              $1 Quick Question
             </a>
           </div>
         </div>
       </section>
 
-      {/* WHAT WE CATCH */}
-      <section id="what" className="bg-white py-16 sm:py-20">
+      {/* AUTHORITY STRIP */}
+      <section className="border-y bg-slate-50 py-10">
+        <div className="mx-auto max-w-5xl px-6 text-center text-sm text-slate-600">
+          Documentation Specialists • Estimate Analysts • Repair Logic Auditors • Industry Veterans
+        </div>
+      </section>
+
+      {/* WHAT WE IDENTIFY */}
+      <section className="py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-3xl font-extrabold text-slate-900">
-            What We Catch
+          <h2 className="text-center text-3xl font-extrabold">
+            What We Identify
           </h2>
 
-          <p className="mx-auto mt-4 max-w-3xl text-center text-slate-600">
-            The common “misses” that quietly cost owners money and delay proper repairs.
-          </p>
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
-              <h3 className="text-xl font-bold text-blue-800">Repair vs Replace</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                Items written to “repair” that clearly require replacement. We document it using the photos
-                and clear reasoning so it can’t be brushed off.
+            <div className="rounded-xl border bg-white p-8 shadow-sm">
+              <h3 className="text-xl font-bold text-blue-600">
+                Repair vs Replace Conflicts
+              </h3>
+              <p className="mt-4 text-sm text-slate-600">
+                Panel distortion, cracked substrates, structural compromise —
+                documented clearly when replacement may be required under OEM standards.
               </p>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
-              <h3 className="text-xl font-bold text-blue-800">Missing Operations</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                Blending, R&amp;I, corrosion protection, seam sealer, setup/measure/pull, sublets,
-                and other operations that vanish on first writes.
+            <div className="rounded-xl border bg-white p-8 shadow-sm">
+              <h3 className="text-xl font-bold text-blue-600">
+                Missing Operations
+              </h3>
+              <p className="mt-4 text-sm text-slate-600">
+                Blend time, R&I procedures, corrosion protection, one-time-use parts,
+                setup & measure, and overlooked line items that affect total repair value.
               </p>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
-              <h3 className="text-xl font-bold text-blue-800">ADAS &amp; OEM Requirements</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                Scans, calibrations, one-time-use hardware, and OEM procedure requirements —
-                flagged and explained cleanly.
+            <div className="rounded-xl border bg-white p-8 shadow-sm">
+              <h3 className="text-xl font-bold text-blue-600">
+                ADAS & OEM Requirements
+              </h3>
+              <p className="mt-4 text-sm text-slate-600">
+                Pre/post scans, calibration requirements, manufacturer repair
+                restrictions, and required documentation standards.
               </p>
             </div>
-          </div>
 
-          <div className="mt-8 text-center text-sm text-slate-600">
-            Want a faster answer?{" "}
-            <a href="#pricing" className="font-semibold text-blue-800 underline underline-offset-2">
-              See $1 Quick Question
-            </a>
           </div>
         </div>
       </section>
 
-      {/* POST REPAIR */}
-      <section className="bg-slate-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <h2 className="text-3xl font-extrabold text-slate-900">
-            Post-Repair Inspection
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-slate-600">
-            Upload final photos and your invoice. If something feels off — we document concerns clearly
-            so they’re taken seriously.
-          </p>
-
-          <p className="mx-auto mt-6 max-w-3xl text-sm text-slate-600">
-            See pricing below —{" "}
-            <a href="#pricing" className="font-semibold text-blue-800 underline underline-offset-2">
-              jump to Pricing
-            </a>
-            .
-          </p>
-
-          <p className="mx-auto mt-4 max-w-3xl text-xs text-slate-500">
-            Documentation support only. Not legal advice.
-          </p>
-        </div>
-      </section>
-
-      {/* PRICING */}
-      <section id="pricing" className="bg-white py-16 sm:py-20">
+      {/* PRODUCTS */}
+      <section id="audit" className="bg-slate-50 py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-3xl font-extrabold text-slate-900">
-            Pricing
+
+          <h2 className="text-center text-3xl font-extrabold">
+            Audit Services
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-center text-slate-600">
-            Simple, flat pricing for launch. No subscriptions.
-          </p>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {/* $1 QUICK QUESTION */}
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
-              <div className="text-sm font-semibold text-slate-700">Fast answer</div>
-              <div className="mt-2 text-4xl font-extrabold text-slate-900">$1</div>
-              <div className="mt-1 text-slate-600">Quick Question</div>
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
 
-              <ul className="mt-6 space-y-2 text-sm text-slate-600">
-                <li>• “Is this repair vs replace wrong?”</li>
-                <li>• “Do I need scans/calibration?”</li>
-                <li>• “What’s missing on this estimate line?”</li>
+            {/* FULL AUDIT */}
+            <div className="rounded-2xl border bg-white p-10 shadow-sm">
+              <h3 className="text-xl font-bold">Full Collision Audit</h3>
+              <p className="mt-2 text-3xl font-extrabold text-blue-600">$49</p>
+
+              <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                <li>Estimate + photo review</li>
+                <li>OEM procedure verification</li>
+                <li>Repair vs replace analysis</li>
+                <li>Missing labor & operations</li>
+                <li>Written audit summary</li>
               </ul>
 
-              <div className="mt-8">
-                <a
-                  href="mailto:Joseph.Marino@collisionss.com?subject=%241%20Quick%20Question%20-%20Collision%20SS&body=Type%20your%20question%20here:%0A%0A(Attach%20photos%20or%20estimate%20if%20needed)%0A%0AName:%0APhone:%0ARole:%20(vehicle%20owner%20/%20shop%20/%20dealer)%0A"
-                  className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white px-8 py-3 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
-                >
-                  Email a $1 Question
-                </a>
-              </div>
+              <p className="mt-6 text-xs text-slate-500">
+                We guarantee at least $100 in missed value identified or your money back.
+              </p>
+
+              <a
+                href="/checkout/full-audit"
+                className="mt-8 block rounded-xl bg-blue-600 px-6 py-3 text-center font-semibold text-white hover:bg-blue-700 transition"
+              >
+                Purchase Audit
+              </a>
             </div>
 
-            {/* $49 AUDIT */}
-            <div className="rounded-3xl border border-blue-200 bg-gradient-to-br from-white to-blue-50 p-8 shadow-sm">
-              <div className="text-sm font-semibold text-blue-900">Full review</div>
-              <div className="mt-2 text-4xl font-extrabold text-slate-900">$49</div>
-              <div className="mt-1 text-slate-600">Estimate + Photo Audit</div>
+            {/* QUICK QUESTION */}
+            <div id="question" className="rounded-2xl border bg-white p-10 shadow-sm">
+              <h3 className="text-xl font-bold">Quick Question</h3>
+              <p className="mt-2 text-3xl font-extrabold text-blue-600">$1</p>
 
-              <ul className="mt-6 space-y-2 text-sm text-slate-700">
-                <li>• Missed damage + missed operations</li>
-                <li>• Repair vs replace issues documented</li>
-                <li>• ADAS / scan / calibration flags</li>
-                <li>• Clean notes you can use immediately</li>
+              <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                <li>Single written question</li>
+                <li>Professional documentation-based response</li>
+                <li>Fast turnaround</li>
               </ul>
 
-              <div className="mt-8">
-                <a
-                  href="#start"
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-blue-700 px-10 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-blue-800"
-                >
-                  Start the $49 Audit
-                </a>
-              </div>
-
-              <p className="mt-4 text-xs text-slate-600">
-                Launch note: submit by email while automation is finalized.
-              </p>
+              <a
+                href="/checkout/quick-question"
+                className="mt-8 block rounded-xl border px-6 py-3 text-center font-semibold hover:bg-slate-50 transition"
+              >
+                Ask a Question
+              </a>
             </div>
+
+            {/* POST REPAIR */}
+            <div className="rounded-2xl border bg-white p-10 shadow-sm">
+              <h3 className="text-xl font-bold">Post-Repair Review</h3>
+              <p className="mt-2 text-3xl font-extrabold text-blue-600">$49</p>
+
+              <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                <li>Invoice + repair photo review</li>
+                <li>Blend & finish evaluation</li>
+                <li>Visible workmanship flags</li>
+                <li>Documentation gap analysis</li>
+              </ul>
+
+              <a
+                href="/checkout/post-repair"
+                className="mt-8 block rounded-xl border px-6 py-3 text-center font-semibold hover:bg-slate-50 transition"
+              >
+                Submit for Review
+              </a>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* START */}
-      <section id="start" className="py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
-            <h2 className="text-3xl font-extrabold text-slate-900">Start an Audit</h2>
-            <p className="mx-auto mt-4 max-w-3xl text-slate-600">
-              For launch, audits are submitted by email while we finalize full automation.
-              Attach your estimate (PDF) and photos.
-            </p>
+      {/* CLOSING STATEMENT */}
+      <section className="py-24 text-center">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="text-3xl font-extrabold">
+            Documentation Changes Everything.
+          </h2>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="mailto:Joseph.Marino@collisionss.com?subject=Collision%20SS%20Audit%20Request%20-%20%2449&body=Name:%0A%0APhone:%0A%0AVehicle%20Year/Make/Model:%0A%0AInsurer:%0A%0AClaim%20%23:%0A%0AWhat%20happened:%0A%0A(Attach%20estimate%20PDF%20and%20photos)%0A"
-                className="inline-flex items-center justify-center rounded-2xl bg-blue-700 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-800"
-              >
-                Email Your $49 Audit Request
-              </a>
+          <p className="mt-6 text-slate-600">
+            Insurance is protected. Shops are compensated.
+            <br />
+            Collision SS ensures the repair documentation protects you.
+          </p>
 
-              <a
-                href="#pricing"
-                className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
-              >
-                Back to Pricing
-              </a>
-            </div>
-          </div>
+          <a
+            href="#audit"
+            className="mt-10 inline-block rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white hover:bg-blue-700 transition"
+          >
+            Start Your Audit
+          </a>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-200 bg-white py-10 text-center text-sm text-slate-500">
-        © {new Date().getFullYear()} Collision SS, LLC.
+      <footer className="border-t py-10 text-center text-sm text-slate-500">
+        © {new Date().getFullYear()} Collision SS, LLC. All rights reserved.
       </footer>
+
     </main>
   );
 }
