@@ -12,12 +12,22 @@ export default function Page() {
             Collision <span className="text-blue-500">SS</span>
           </div>
 
-          <Link
-            href="/full-audit"
-            className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-lg hover:bg-blue-500 transition"
-          >
-            Start an Audit
-          </Link>
+          {/* HEADER BUTTONS */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/quick-question"
+              className="rounded-xl border border-white/70 px-4 py-2 text-sm font-semibold hover:border-blue-400 hover:text-blue-400 transition"
+            >
+              $1 Question
+            </Link>
+
+            <Link
+              href="/full-audit"
+              className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-lg hover:bg-blue-500 transition"
+            >
+              Start Full Audit
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -72,14 +82,35 @@ export default function Page() {
         </div>
       </section>
 
+      {/* EXPERIENCE SECTION */}
+      <section className="bg-slate-950 py-20 px-6">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-extrabold text-white mb-6">
+            Experience You Can Trust
+          </h2>
+
+          <p className="text-slate-300 text-lg leading-relaxed">
+            With over <strong>30 years of hands-on experience</strong>, 
+            <strong> I-CAR Platinum certifications</strong>, and access to the industry’s 
+            largest databases of collision repair knowledge, OEM procedures, and 
+            state regulations — Collision SS is here to empower everyone involved in the 
+            auto collision repair process.
+            <br /><br />
+            Our mission is simple: equip you with clear, expert-backed insight so you 
+            <strong> never get ripped off</strong> and always know what the repair should 
+            actually look like.
+          </p>
+        </div>
+      </section>
+
       {/* SERVICES SECTION */}
-      <section className="bg-slate-950 py-28">
+      <section className="bg-slate-950 pb-28">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <h2 className="text-3xl font-extrabold">
             Audit Services
           </h2>
 
-          <div className="mt-16 grid gap-10 md:grid-cols-3">
+          <div className="mt-16 grid gap-10 md:grid-cols-2">
 
             {/* FULL AUDIT */}
             <Link
@@ -108,21 +139,6 @@ export default function Page() {
               <p className="mt-6 text-sm text-slate-400">
                 One documentation-based question. Clear professional answer.
                 Designed for fast clarification.
-              </p>
-            </Link>
-
-            {/* POST REPAIR */}
-            <Link
-              href="/post-repair"
-              className="group rounded-2xl border border-slate-800 bg-slate-900 p-10 shadow-xl transition hover:border-blue-600 hover:shadow-blue-900/30"
-            >
-              <h3 className="text-xl font-bold text-blue-400 group-hover:text-blue-300">
-                Post-Repair Review
-              </h3>
-              <p className="mt-4 text-3xl font-extrabold">$49</p>
-              <p className="mt-6 text-sm text-slate-400">
-                Final invoice and repair inspection review. Identify
-                documentation gaps and visible workmanship flags.
               </p>
             </Link>
 
