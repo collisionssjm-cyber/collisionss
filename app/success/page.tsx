@@ -1,15 +1,8 @@
-'use client';
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-import { useSearchParams } from "next/navigation";
+import SuccessContent from "./success-content";
 
 export default function SuccessPage() {
-  const params = useSearchParams();
-  const sessionId = params.get("session_id");
-
-  return (
-    <div>
-      <h1>Payment Success</h1>
-      <p>Session ID: {sessionId}</p>
-    </div>
-  );
+  return <SuccessContent />;
 }
