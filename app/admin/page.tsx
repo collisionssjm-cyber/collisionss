@@ -1,8 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -17,6 +14,7 @@ export default function AdminPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
+  // Initialize Supabase client (client-side only)
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -51,15 +49,16 @@ export default function AdminPage() {
     let list = [...audits];
 
     if (status !== "all") {
-      list = list.filter(a => a.status === status);
+      list = list.filter((a) => a.status === status);
     }
 
     if (searchTerm.trim() !== "") {
       const term = searchTerm.toLowerCase();
-      list = list.filter(a =>
-        (a.name?.toLowerCase() || "").includes(term) ||
-        (a.email?.toLowerCase() || "").includes(term) ||
-        (a.vehicle?.toLowerCase() || "").includes(term)
+      list = list.filter(
+        (a) =>
+          (a.name?.toLowerCase() || "").includes(term) ||
+          (a.email?.toLowerCase() || "").includes(term) ||
+          (a.vehicle?.toLowerCase() || "").includes(term)
       );
     }
 
@@ -89,15 +88,29 @@ export default function AdminPage() {
 
   function exportCSV() {
     const rows = [
-      ["Name", "Email", "Vehicle", "Insurance", "Notes", "Status", "Internal Notes"],
-      ...audits.map(a => [
-        a.name, a.email, a.vehicle, a.insurance_company, a.notes, a.status, a.internal_notes
-      ])
+      [
+        "Name",
+        "Email",
+        "Vehicle",
+        "Insurance",
+        "Notes",
+        "Status",
+        "Internal Notes",
+      ],
+      ...audits.map((a) => [
+        a.name,
+        a.email,
+        a.vehicle,
+        a.insurance_company,
+        a.notes,
+        a.status,
+        a.internal_notes,
+      ]),
     ];
 
     const csvContent =
       "data:text/csv;charset=utf-8," +
-      rows.map(r => r.map(String).join(",")).join("\n");
+      rows.map((r) => r.map(String).join(",")).join("\n");
 
     const link = document.createElement("a");
     link.href = encodeURI(csvContent);
@@ -115,7 +128,7 @@ export default function AdminPage() {
             className="w-full p-2 rounded bg-slate-700"
             placeholder="Enter admin password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <button
             onClick={handleLogin}
@@ -141,6 +154,7 @@ export default function AdminPage() {
         </button>
       </div>
 
+      {/* Search + Filter */}
       <div className="flex gap-4 mb-6">
         <input
           className="bg-slate-800 p-2 rounded w-1/3"
@@ -179,7 +193,7 @@ export default function AdminPage() {
             </thead>
 
             <tbody>
-              {filteredAudits.map(audit => (
+              {filteredAudits.map((audit) => (
                 <tr key={audit.id} className="border-t border-slate-700">
                   <td className="p-3">{audit.name}</td>
                   <td className="p-3">{audit.email}</td>
@@ -212,7 +226,9 @@ export default function AdminPage() {
                     <select
                       className="bg-slate-800 p-2 rounded"
                       value={audit.status}
-                      onChange={(e) => updateStatus(audit.id, e.target.value)}
+                      onChange={(e) =>
+                        updateStatus(audit.id, e.target.value)
+                      }
                     >
                       <option value="paid">Paid</option>
                       <option value="completed">Completed</option>
