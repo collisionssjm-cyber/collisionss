@@ -1,34 +1,34 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2026-01-28.clover",
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2023-10-16",
 });
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
-    const body = await req.json();
-
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
       payment_method_types: ["card"],
+      mode: "payment",
       line_items: [
         {
           price_data: {
             currency: "usd",
-            product_data: { name: "Full Collision Audit" },
-            unit_amount: 3000,
+            product_data: {
+              name: "Collision SS Full Audit",
+            },
+            unit_amount: 4900,
           },
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/audit`,
+      success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/cancel`,
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err: any) {
-    console.error("Stripe session error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Stripe error" }, { status: 500 });
   }
 }
