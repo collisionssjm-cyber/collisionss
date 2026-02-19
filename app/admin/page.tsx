@@ -1,5 +1,8 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -127,7 +130,6 @@ export default function AdminPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white p-10">
-
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
 
@@ -139,7 +141,6 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {/* Search + Filter */}
       <div className="flex gap-4 mb-6">
         <input
           className="bg-slate-800 p-2 rounded w-1/3"
@@ -185,7 +186,6 @@ export default function AdminPage() {
                   <td className="p-3">{audit.vehicle}</td>
                   <td className="p-3">{audit.insurance_company}</td>
 
-                  {/* FILE LINKS */}
                   <td className="p-3">
                     {audit.files?.length > 0 ? (
                       <ul className="space-y-1">
