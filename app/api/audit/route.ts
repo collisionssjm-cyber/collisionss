@@ -1,41 +1,37 @@
-export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+// Server-side Supabase client
+const supabase = createClient(
+  process.env.SUPABASE_URL as string,
+  process.env.SUPABASE_SERVICE_ROLE_KEY as string
+);
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, details } = body || {};
 
-    if (!name || !email || !details) {
-      return NextResponse.json(
-        { success: false, error: "Missing required fields." },
-        { status: 400 }
-      );
-    }
-
-    await resend.emails.send({
-      from: "Collision SS <no-reply@collisionss.com>",
-      to: "collisionss.jm@gmail.com",
-      subject: "New Collision SS Audit Submission",
-      html: `
-        <h2>New Audit Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Details:</strong><br>${details.replace(/\n/g, "<br>")}</p>
-      `,
+    const { data, error } = await supabase.from("audits").insert({
+      name: body.name,
+      email: body.email,
+      vehicle: body.vehicle,
+      insurance_company: body.insurance_company,
+      notes: body.notes,
+      status: "paid",
+      files: body.files || [],
     });
 
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("AUDIT POST ERROR:", error);
-    return NextResponse.json(
-      { success: false, error: "Server error" },
-      { status: 500 }
-    );
+    if (error) {
+      console.error("Supabase error:", error);
+      return NextResponse.json({ error: "DB insert failed" }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, data });
+  } catch (err: any) {
+    console.error("Server error:", err);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

@@ -1,4 +1,6 @@
 "use client";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
@@ -14,7 +16,6 @@ export default function AdminPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
-  // Initialize Supabase client (client-side only)
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -22,7 +23,6 @@ export default function AdminPage() {
 
   async function loadAudits() {
     setLoading(true);
-
     const { data, error } = await supabase
       .from("audits")
       .select("*")
@@ -145,7 +145,6 @@ export default function AdminPage() {
     <main className="min-h-screen bg-slate-950 text-white p-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-
         <button
           onClick={exportCSV}
           className="bg-green-600 px-4 py-2 rounded-lg hover:bg-green-500"
