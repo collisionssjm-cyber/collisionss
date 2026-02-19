@@ -1,6 +1,7 @@
-"use client";
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = false;
+
+"use client";
 
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
@@ -11,11 +12,12 @@ export default function AdminPage() {
 
   const [audits, setAudits] = useState<any[]>([]);
   const [filteredAudits, setFilteredAudits] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
+  // ✅ Supabase client ONLY runs in the browser, so this avoids build errors
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -23,6 +25,7 @@ export default function AdminPage() {
 
   async function loadAudits() {
     setLoading(true);
+
     const { data, error } = await supabase
       .from("audits")
       .select("*")
@@ -49,16 +52,15 @@ export default function AdminPage() {
     let list = [...audits];
 
     if (status !== "all") {
-      list = list.filter((a) => a.status === status);
+      list = list.filter(a => a.status === status);
     }
 
     if (searchTerm.trim() !== "") {
       const term = searchTerm.toLowerCase();
-      list = list.filter(
-        (a) =>
-          (a.name?.toLowerCase() || "").includes(term) ||
-          (a.email?.toLowerCase() || "").includes(term) ||
-          (a.vehicle?.toLowerCase() || "").includes(term)
+      list = list.filter(a =>
+        (a.name?.toLowerCase() || "").includes(term) ||
+        (a.email?.toLowerCase() || "").includes(term) ||
+        (a.vehicle?.toLowerCase() || "").includes(term)
       );
     }
 
@@ -88,41 +90,29 @@ export default function AdminPage() {
 
   function exportCSV() {
     const rows = [
-      [
-        "Name",
-        "Email",
-        "Vehicle",
-        "Insurance",
-        "Notes",
-        "Status",
-        "Internal Notes",
-      ],
-      ...audits.map((a) => [
-        a.name,
-        a.email,
-        a.vehicle,
-        a.insurance_company,
-        a.notes,
-        a.status,
-        a.internal_notes,
-      ]),
+      ["Name", "Email", "Vehicle", "Insurance", "Notes", "Status", "Internal Notes"],
+      ...audits.map(a => [
+        a.name, a.email, a.vehicle, a.insurance_company, a.notes, a.status, a.internal_notes
+      ])
     ];
 
-    const csvContent =
+    const csv =
       "data:text/csv;charset=utf-8," +
-      rows.map((r) => r.map(String).join(",")).join("\n");
+      rows.map(r => r.join(",")).join("\n");
 
     const link = document.createElement("a");
-    link.href = encodeURI(csvContent);
+    link.href = encodeURI(csv);
     link.download = "audits_export.csv";
     link.click();
   }
 
+  // 🔐 LOGIN SCREEN
   if (!authenticated) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
         <div className="p-8 bg-slate-800 rounded-xl w-96 text-center space-y-4">
           <h1 className="text-xl font-bold">Admin Login</h1>
+
           <input
             type="password"
             className="w-full p-2 rounded bg-slate-700"
@@ -130,6 +120,7 @@ export default function AdminPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <button
             onClick={handleLogin}
             className="w-full bg-blue-600 py-2 rounded-lg hover:bg-blue-500"
@@ -141,10 +132,13 @@ export default function AdminPage() {
     );
   }
 
+  // 🔥 ADMIN DASHBOARD
   return (
     <main className="min-h-screen bg-slate-950 text-white p-10">
+
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+
         <button
           onClick={exportCSV}
           className="bg-green-600 px-4 py-2 rounded-lg hover:bg-green-500"
@@ -153,7 +147,7 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {/* Search + Filter */}
+      {/* Filters */}
       <div className="flex gap-4 mb-6">
         <input
           className="bg-slate-800 p-2 rounded w-1/3"
@@ -225,9 +219,7 @@ export default function AdminPage() {
                     <select
                       className="bg-slate-800 p-2 rounded"
                       value={audit.status}
-                      onChange={(e) =>
-                        updateStatus(audit.id, e.target.value)
-                      }
+                      onChange={(e) => updateStatus(audit.id, e.target.value)}
                     >
                       <option value="paid">Paid</option>
                       <option value="completed">Completed</option>
