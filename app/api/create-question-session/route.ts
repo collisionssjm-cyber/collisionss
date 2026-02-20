@@ -12,12 +12,8 @@ export async function POST() {
       payment_method_types: ["card"],
       line_items: [
         {
-          price_data: {
-            currency: "usd",
-            product_data: { name: "Quick Question Review" },
-            unit_amount: 1000,
-          },
-          quantity: 1,
+         price: process.env.STRIPE_PRICE_QUESTION,
+         quantity: 1,
         },
       ],
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/question-success?session_id={CHECKOUT_SESSION_ID}`,
