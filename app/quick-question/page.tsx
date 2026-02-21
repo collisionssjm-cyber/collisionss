@@ -1,16 +1,24 @@
-const data = await res.json();
-console.log("API RESPONSE:", data);
+async function handleSubmit(e: any) {
+  e.preventDefault();
+  setLoading(true);
 
-if (!res.ok) {
-  alert("Server error");
-  setLoading(false);
-  return;
+  const res = await fetch(...);
+  const data = await res.json();
+
+  console.log("API RESPONSE:", data);
+
+  if (!res.ok) {
+    alert("Server error");
+    setLoading(false);
+    return;
+  }
+
+  if (!data.url) {
+    alert("No checkout URL returned");
+    setLoading(false);
+    return;
+  }
+
+  window.location.href = data.url;
 }
-
-if (!data.url) {
-  alert("No checkout URL returned");
-  setLoading(false);
-  return;
-}
-
-window.location.href = data.url;
+s
