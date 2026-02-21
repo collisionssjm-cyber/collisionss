@@ -21,8 +21,9 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/question-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/quick-question`,
+     success_url: `https://collisionss.com/question-success?session_id={CHECKOUT_SESSION_ID}`,
+     cancel_url: `https://collisionss.com/quick-question`,
+
       metadata: {
         name,
         email,
