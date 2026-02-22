@@ -1,60 +1,65 @@
-import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { headers } from "next/headers";
 import { Resend } from "resend";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-const resend = new Resend(process.env.RESEND_API_KEY as string);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY!);
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const body = await req.text();
-  const sig = req.headers.get("stripe-signature") as string;
+  const sig = headers().get("stripe-signature") as string;
 
-  let event: Stripe.Event;
+  let event;
 
   try {
     event = stripe.webhooks.constructEvent(
       body,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET as string
+      process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (err) {
     console.error("Webhook signature verification failed.", err);
-    return new NextResponse("Webhook Error", { status: 400 });
+    return new Response("Webhook Error", { status: 400 });
   }
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
 
     const customerEmail = session.customer_details?.email;
+    const amount = session.amount_total ? session.amount_total / 100 : 0;
 
     try {
-      // Email to you
+      // Email to YOU
       await resend.emails.send({
         from: "Collision SS <noreply@collisionss.com>",
         to: "joseph.marino@collisionss.com",
-        subject: "New Audit Purchased",
-        html: `<p>New audit purchased.</p>
-               <p>Email: ${customerEmail}</p>
-               <p>Session ID: ${session.id}</p>`,
+        subject: "New Audit Payment Received",
+        html: `
+          <h2>New Payment Received</h2>
+          <p>Customer Email: ${customerEmail}</p>
+          <p>Amount: $${amount}</p>
+        `,
       });
 
-      // Email to customer
+      // Email to CUSTOMER
       if (customerEmail) {
         await resend.emails.send({
           from: "Collision SS <noreply@collisionss.com>",
           to: customerEmail,
-          subject: "Collision SS Audit Confirmation",
-          html: `<p>Thanks for your purchase.</p>
-                 <p>Please upload your documents here:</p>
-                 <a href="${process.env.NEXT_PUBLIC_BASE_URL}/upload?session_id=${session.id}">
-                   Upload Files
-                 </a>`,
+          subject: "We Received Your Submission – Collision SS",
+          html: `
+            <h2>Thank You</h2>
+            <p>We received your submission and payment.</p>
+            <p>Our team is reviewing your documents and will contact you shortly.</p>
+            <p>– Collision SS</p>
+          `,
         });
       }
+
     } catch (emailError) {
-      console.error("Email error:", emailError);
+      console.error("Email sending failed:", emailError);
     }
   }
 
-  return NextResponse.json({ received: true });
+  return new Response("Success", { status: 200 });
 }
