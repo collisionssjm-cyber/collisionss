@@ -14,34 +14,40 @@ export default function AuditPage() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
 
-    const res = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Checkout session failed.");
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
       alert("Something went wrong.");
       setLoading(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-white px-6 py-20">
+    <main className="min-h-screen bg-white px-6 py-24">
       <div className="mx-auto max-w-3xl">
 
         <h1 className="text-3xl font-extrabold text-center">
@@ -49,7 +55,7 @@ export default function AuditPage() {
         </h1>
 
         <p className="mt-6 text-center text-slate-600">
-          Provide basic information below. After secure payment,
+          Provide your basic information below. After secure payment,
           you will upload your estimate and supporting documentation.
         </p>
 
