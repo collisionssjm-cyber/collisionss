@@ -1,3 +1,4 @@
+console.log("AUDIT PAGE LOADED NEW VERSION")
 "use client";
 
 import { useState } from "react";
