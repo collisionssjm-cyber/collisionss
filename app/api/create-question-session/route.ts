@@ -20,20 +20,16 @@ export async function POST(req: Request) {
       throw new Error("Missing STRIPE_QUESTION_PRICE_ID");
     }
 
-    if (!process.env.NEXT_PUBLIC_SITE_URL) {
-      throw new Error("Missing NEXT_PUBLIC_SITE_URL");
-    }
-
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [
         {
-          price: process.env.STRIPE_QUESTION_PRICE_ID,
+          price: process.env.STRIPE_QUESTION_PRICE_ID!,
           quantity: 1,
         },
       ],
 
-      // 🔥 This is what fixes your email issue
+      // This fixes the checkout autofill issue
       customer_email: email,
 
       metadata: {
@@ -42,13 +38,11 @@ export async function POST(req: Request) {
         question,
       },
 
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/question-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/quick-question`,
+      success_url:
+        "https://www.collisionss.com/question-success?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url:
+        "https://www.collisionss.com/quick-question",
     });
-
-    if (!session.url) {
-      throw new Error("Stripe did not return a session URL");
-    }
 
     return NextResponse.json({ url: session.url });
 
