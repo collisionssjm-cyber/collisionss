@@ -3,39 +3,39 @@
 import { useState } from "react";
 
 export default function AuditPage() {
-  const [estimate, setEstimate] = useState<File | null>(null);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    year: "",
+    make: "",
+    model: "",
+    comments: "",
+  });
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-
-    if (!estimate) {
-      setError("Please upload your estimate PDF.");
-      return;
-    }
-
     setLoading(true);
 
-    try {
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!data.url) {
-        throw new Error("Failed to create checkout session");
-      }
-
+    if (data.url) {
       window.location.href = data.url;
-
-    } catch (err: any) {
-      setError("Something went wrong. Please try again.");
+    } else {
+      alert("Something went wrong.");
       setLoading(false);
     }
   };
@@ -49,51 +49,65 @@ export default function AuditPage() {
         </h1>
 
         <p className="mt-6 text-center text-slate-600">
-          Upload your repair estimate and supporting photos.
-          Our team will perform a structured review using OEM-backed procedures.
+          Provide basic information below. After secure payment,
+          you will upload your estimate and supporting documentation.
         </p>
 
         <form
           onSubmit={handleSubmit}
-          className="mt-12 space-y-8 rounded-xl border border-slate-200 bg-slate-50 p-8 shadow-sm"
+          className="mt-12 space-y-6 rounded-xl border border-slate-200 bg-slate-50 p-8 shadow-sm"
         >
 
-          {/* Upload Area */}
-          <div>
-            <label className="block text-sm font-semibold mb-3">
-              Upload Estimate (PDF)
-            </label>
+          <input
+            name="name"
+            placeholder="Full Name"
+            required
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-300 px-4 py-3"
+          />
 
-            <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-white p-10 text-center hover:border-blue-500 transition">
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) =>
-                  setEstimate(e.target.files ? e.target.files[0] : null)
-                }
-                className="mb-4"
-                required
-              />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            required
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-300 px-4 py-3"
+          />
 
-              {estimate ? (
-                <p className="text-sm text-green-600 font-medium">
-                  {estimate.name} selected
-                </p>
-              ) : (
-                <p className="text-sm text-slate-500">
-                  Drag and drop or select your PDF file
-                </p>
-              )}
-            </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <input
+              name="year"
+              placeholder="Vehicle Year"
+              required
+              onChange={handleChange}
+              className="rounded-lg border border-slate-300 px-4 py-3"
+            />
+            <input
+              name="make"
+              placeholder="Make"
+              required
+              onChange={handleChange}
+              className="rounded-lg border border-slate-300 px-4 py-3"
+            />
+            <input
+              name="model"
+              placeholder="Model"
+              required
+              onChange={handleChange}
+              className="rounded-lg border border-slate-300 px-4 py-3"
+            />
           </div>
 
-          {/* Error */}
-          {error && (
-            <p className="text-sm text-red-600 text-center">{error}</p>
-          )}
+          <textarea
+            name="comments"
+            placeholder="Additional Comments (optional)"
+            rows={4}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-300 px-4 py-3"
+          />
 
-          {/* Submit */}
-          <div className="text-center">
+          <div className="text-center pt-4">
             <button
               type="submit"
               disabled={loading}
