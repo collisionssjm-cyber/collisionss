@@ -1,156 +1,136 @@
-import Image from "next/image";
-import Link from "next/link";
-
 export default function Page() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-screen bg-white text-slate-900">
 
       {/* HEADER */}
-      <header className="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <header className="border-b bg-white">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <div className="text-xl font-extrabold tracking-tight">
-            Collision <span className="text-blue-500">SS</span>
-          </div>
-
-          {/* HEADER BUTTONS */}
-          <div className="flex items-center gap-4">
-            <Link
-              href="/quick-question"
-              className="rounded-xl border border-white/70 px-4 py-2 text-sm font-semibold hover:border-blue-400 hover:text-blue-400 transition"
-            >
-              $1 Question
-            </Link>
-
-            <Link
-              href="/full-audit"
-              className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-lg hover:bg-blue-500 transition"
-            >
-              Start Full Audit
-            </Link>
+            <span className="text-slate-900">Collision</span>{" "}
+            <span className="text-blue-700">SS</span>
           </div>
         </div>
       </header>
 
       {/* HERO */}
-      <section className="relative flex min-h-screen items-center justify-center text-center">
+      <section className="mx-auto max-w-5xl px-6 py-24 text-center">
+        <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
+          Stop Letting Insurance Companies Control Your Claim.
+        </h1>
+        <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
+          Collision SS audits repair estimates using OEM procedures, documented industry standards,
+          and real-world collision shop management expertise — built to protect vehicle owners.
+        </p>
+      </section>
 
-        {/* Background Image */}
-        <Image
-          src="/hero.jpg"
-          alt="Luxury supercar with custom wet paint"
-          fill
-          priority
-          className="object-cover object-center brightness-110 contrast-110"
-        />
-
-        {/* Blue performance overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-slate-950/40 to-black/60" />
-
-        {/* Glow Accent */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(59,130,246,0.25),transparent_60%)]" />
-
-        {/* Content */}
-        <div className="relative z-10 mx-auto max-w-4xl px-6">
-          <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl drop-shadow-2xl">
-            Before You Approve the Repair,
-            <span className="block text-blue-400">
-              Verify the Documentation.
-            </span>
-          </h1>
-
-          <p className="mx-auto mt-8 max-w-2xl text-lg text-slate-200">
-            We audit collision repair documentation, OEM procedures,
-            and estimate logic to ensure the repair is properly written
-            before work begins.
-          </p>
-
-          <div className="mt-12 flex flex-wrap justify-center gap-6">
-            <Link
-              href="/full-audit"
-              className="rounded-2xl bg-blue-600 px-10 py-4 text-lg font-semibold text-white shadow-2xl hover:bg-blue-500 transition"
-            >
-              Full Audit – $49
-            </Link>
-
-            <Link
-              href="/quick-question"
-              className="rounded-2xl border border-white/70 px-10 py-4 text-lg font-semibold hover:border-blue-400 hover:text-blue-400 transition"
-            >
-              $1 Quick Question
-            </Link>
+      {/* REALITY */}
+      <section className="bg-slate-50 py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="text-3xl font-extrabold text-center">
+            Most Vehicle Owners Never See What’s Missing.
+          </h2>
+          <div className="mt-10 space-y-4 text-center text-slate-600">
+            <p>Insurance estimates are written quickly.</p>
+            <p>Required procedures get overlooked.</p>
+            <p>Necessary operations get denied.</p>
+            <p>Documentation gaps go unnoticed.</p>
+            <p className="mt-6 font-medium text-slate-800">
+              You shouldn’t need to understand collision repair to protect your claim.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* EXPERIENCE SECTION */}
-      <section className="bg-slate-950 py-20 px-6">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-extrabold text-white mb-6">
-            Experience You Can Trust
+      {/* INDUSTRY EXPERIENCE */}
+      <section className="py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="text-3xl font-extrabold text-center">
+            Built From Real Collision Shop Experience.
           </h2>
-
-          <p className="text-slate-300 text-lg leading-relaxed">
-            With over <strong>30 years of hands-on experience</strong>, 
-            <strong> I-CAR Platinum certifications</strong>, and access to the industry’s 
-            largest databases of collision repair knowledge, OEM procedures, and 
-            state regulations — Collision SS is here to empower everyone involved in the 
-            auto collision repair process.
-            <br /><br />
-            Our mission is simple: equip you with clear, expert-backed insight so you 
-            <strong> never get ripped off</strong> and always know what the repair should 
-            actually look like.
+          <div className="mt-10 grid gap-6 text-slate-600 sm:grid-cols-2">
+            <ul className="space-y-3">
+              <li>• OEM repair procedure verification</li>
+              <li>• Labor operation and overlap review</li>
+              <li>• Structural and suspension diagnostics</li>
+            </ul>
+            <ul className="space-y-3">
+              <li>• ADAS-related operation analysis</li>
+              <li>• Estimate accuracy evaluation</li>
+              <li>• Insurer documentation behavior insight</li>
+            </ul>
+          </div>
+          <p className="mt-8 text-center text-slate-600">
+            Powered by a purpose-built AI service advisor trained on real collision repair workflows,
+            our process focuses on clarity and structured documentation.
           </p>
         </div>
       </section>
 
-      {/* SERVICES SECTION */}
-      <section className="bg-slate-950 pb-28">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <h2 className="text-3xl font-extrabold">
-            Audit Services
+      {/* SHOP SECTION */}
+      <section className="bg-slate-50 py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="text-3xl font-extrabold text-center">
+            Shop Audit & Production Review
           </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-slate-600">
+            Collision SS provides structured shop audits designed to increase profitability,
+            tighten operations, and improve production efficiency.
+          </p>
+          <div className="mt-10 grid gap-6 text-slate-600 sm:grid-cols-2">
+            <ul className="space-y-3">
+              <li>• Operational workflow analysis</li>
+              <li>• Estimate accuracy review</li>
+              <li>• Missed operation identification</li>
+            </ul>
+            <ul className="space-y-3">
+              <li>• Profit leakage detection</li>
+              <li>• Production bottleneck evaluation</li>
+              <li>• Structured performance guidance</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-          <div className="mt-16 grid gap-10 md:grid-cols-2">
+      {/* SINGLE ACTION SECTION */}
+      <section className="py-24">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <h2 className="text-3xl font-extrabold">
+            Choose Your Next Step.
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-slate-600">
+            Whether you’re a vehicle owner seeking clarity or a repair facility looking to improve performance,
+            Collision SS provides structured, experience-driven guidance.
+          </p>
 
-            {/* FULL AUDIT */}
-            <Link
-              href="/full-audit"
-              className="group rounded-2xl border border-slate-800 bg-slate-900 p-10 shadow-xl transition hover:border-blue-600 hover:shadow-blue-900/30"
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <a
+              href="/audit"
+              className="rounded-xl bg-blue-700 px-8 py-4 text-lg font-semibold text-white shadow-md transition hover:bg-blue-800"
             >
-              <h3 className="text-xl font-bold text-blue-400 group-hover:text-blue-300">
-                Full Collision Audit
-              </h3>
-              <p className="mt-4 text-3xl font-extrabold">$49</p>
-              <p className="mt-6 text-sm text-slate-400">
-                Complete estimate and photo review. OEM logic verification.
-                Missing operations identified. Written audit summary included.
-              </p>
-            </Link>
-
-            {/* QUICK QUESTION */}
-            <Link
+              Start a Full Audit
+            </a>
+            <a
               href="/quick-question"
-              className="group rounded-2xl border border-slate-800 bg-slate-900 p-10 shadow-xl transition hover:border-blue-600 hover:shadow-blue-900/30"
+              className="rounded-xl border border-slate-300 px-8 py-4 text-lg font-semibold text-slate-900 transition hover:bg-slate-100"
             >
-              <h3 className="text-xl font-bold text-blue-400 group-hover:text-blue-300">
-                Quick Question
-              </h3>
-              <p className="mt-4 text-3xl font-extrabold">$1</p>
-              <p className="mt-6 text-sm text-slate-400">
-                One documentation-based question. Clear professional answer.
-                Designed for fast clarification.
-              </p>
-            </Link>
-
+              Ask a $1 Question
+            </a>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-800 py-10 text-center text-sm text-slate-500">
-        © {new Date().getFullYear()} Collision SS, LLC.
+      <footer className="border-t bg-white py-10 text-center text-sm text-slate-500">
+        <p>
+          Collision SS provides estimate analysis and advisory insight based on industry standards
+          and manufacturer documentation. Collision SS is not a public adjuster, insurance adjuster,
+          legal representative, or claims negotiator. All information provided is advisory in nature
+          and intended for informational purposes only.
+        </p>
+        <p className="mt-4">
+          © {new Date().getFullYear()} Collision SS, LLC.
+        </p>
       </footer>
-
     </main>
   );
 }
