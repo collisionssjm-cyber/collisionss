@@ -1,19 +1,33 @@
-async function updateStatus(id: string, status: string) {
-  console.log("Updating:", id, status);
+import { createClient } from "@supabase/supabase-js";
+import { NextResponse } from "next/server";
 
-  const res = await fetch("/api/update-status", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id, status }),
-  });
+export async function POST(req: Request) {
+  try {
+    const { id, status } = await req.json();
 
-  const data = await res.json();
-  console.log("Response:", data);
+    const supabase = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
-  if (data.error) {
-    alert("Update failed: " + data.error);
-    return;
+    const { error } = await supabase
+      .from("audits")
+      .update({ status })
+      .eq("id", id);
+
+    if (error) {
+      return NextResponse.json(
+        { error: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err.message },
+      { status: 500 }
+    );
   }
-
-  alert("Updated!");
 }
