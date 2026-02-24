@@ -12,19 +12,25 @@ export default function AdminPage() {
   }, []);
 
   async function updateStatus(id: string, status: string) {
-    await fetch("/api/update-status", {
+    const res = await fetch("/api/update-status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
 
-    location.reload();
+    const data = await res.json();
+
+    if (data.error) {
+      alert("Update failed: " + data.error);
+      return;
+    }
+
+    window.location.reload();
   }
 
   return (
     <div className="min-h-screen bg-slate-950 text-white p-10">
       <div className="max-w-6xl mx-auto">
-
         <h1 className="text-3xl font-bold mb-8">
           Collision SS Admin Dashboard
         </h1>
