@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -9,7 +8,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const sig = headers().get("stripe-signature") as string;
+  const sig = req.headers.get("stripe-signature") as string;
 
   let event;
 
@@ -22,9 +21,7 @@ export async function POST(req: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
-
     console.log("Checkout completed:", session.id);
-    // You can insert Supabase logic here if needed
   }
 
   return NextResponse.json({ received: true });
