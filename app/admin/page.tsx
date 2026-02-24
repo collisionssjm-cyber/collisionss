@@ -1,17 +1,25 @@
-export const dynamic = "force-dynamic";
+"use client";
 
-import { createClient } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 
-export default async function AdminPage() {
-  const supabase = createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+export default function AdminPage() {
+  const [audits, setAudits] = useState<any[]>([]);
 
-  const { data: audits } = await supabase
-    .from("audits")
-    .select("*")
-    .order("id", { ascending: false });
+  useEffect(() => {
+    fetch("/api/admin-data")
+      .then((res) => res.json())
+      .then((data) => setAudits(data.audits));
+  }, []);
+
+  async function updateStatus(id: string, status: string) {
+    await fetch("/api/update-status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
+    });
+
+    location.reload();
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 text-white p-10">
@@ -22,11 +30,10 @@ export default async function AdminPage() {
         </h1>
 
         <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
-
-          <div className="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+          <div className="px-6 py-4 border-b border-slate-800 flex justify-between">
             <h2 className="text-lg font-semibold">Full Audit Submissions</h2>
             <span className="text-sm text-slate-400">
-              {audits?.length || 0} total
+              {audits.length} total
             </span>
           </div>
 
@@ -37,45 +44,39 @@ export default async function AdminPage() {
                   <th className="text-left px-6 py-3">Name</th>
                   <th className="text-left px-6 py-3">Email</th>
                   <th className="text-left px-6 py-3">Vehicle</th>
-                  <th className="text-left px-6 py-3">Insurance</th>
                   <th className="text-left px-6 py-3">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {audits?.map((audit: any) => (
-                  <tr
-                    key={audit.id}
-                    className="border-t border-slate-800 hover:bg-slate-800/40"
-                  >
+                {audits.map((audit) => (
+                  <tr key={audit.id} className="border-t border-slate-800">
                     <td className="px-6 py-3">{audit.name}</td>
                     <td className="px-6 py-3">{audit.email}</td>
                     <td className="px-6 py-3">{audit.vehicle || "-"}</td>
                     <td className="px-6 py-3">
-                      {audit.insurance_company || "-"}
-                    </td>
-                    <td className="px-6 py-3">
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          audit.status === "paid"
-                            ? "bg-emerald-600/20 text-emerald-400"
-                            : "bg-yellow-600/20 text-yellow-400"
-                        }`}
+                      <select
+                        value={audit.status}
+                        onChange={(e) =>
+                          updateStatus(audit.id, e.target.value)
+                        }
+                        className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1"
                       >
-                        {audit.status}
-                      </span>
+                        <option value="paid">Paid</option>
+                        <option value="in_process">In Process</option>
+                        <option value="complete">Complete</option>
+                      </select>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
-            {!audits?.length && (
+            {!audits.length && (
               <div className="p-6 text-slate-400">
                 No audit submissions yet.
               </div>
             )}
           </div>
-
         </div>
       </div>
     </div>
