@@ -19,7 +19,7 @@ export async function POST() {
               name: "Collision SS Full Audit",
               description: "Professional collision estimate audit",
             },
-            unit_amount: 4900, // $49.00
+            unit_amount: 100, // $1.00
           },
           quantity: 1,
         },
