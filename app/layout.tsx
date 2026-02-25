@@ -12,24 +12,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Collision SS | Collision Estimate Review & Claim Support",
+export const metadata: Metadata = {
+  title: "Collision SS | Independent Collision Estimate Review",
   description:
-    "Independent collision estimate review and claim support. We identify missing operations, OEM procedure requirements, and documentation gaps before repairs begin.",
+    "Independent collision estimate review and shop performance audits. OEM procedure verification, structural analysis, and documentation clarity before repairs begin.",
   openGraph: {
     title: "Collision SS",
     description:
-      "Independent collision estimate review and claim support.",
+      "Independent collision estimate review and structured shop audits.",
     url: "https://www.collisionss.com",
     siteName: "Collision SS",
     type: "website",
   },
 };
+
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
