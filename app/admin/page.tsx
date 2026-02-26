@@ -31,10 +31,31 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white p-10">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">
-          Collision SS Admin Dashboard
-        </h1>
 
+        {/* 🔥 Header With Navigation */}
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold">
+            Collision SS Admin Dashboard
+          </h1>
+
+          <div className="flex gap-4">
+            <a
+              href="/admin"
+              className="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm"
+            >
+              Full Audits
+            </a>
+
+            <a
+              href="/admin/parts"
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm"
+            >
+              Parts Tracker
+            </a>
+          </div>
+        </div>
+
+        {/* 🔥 Audit Table */}
         <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
           <div className="px-6 py-4 border-b border-slate-800 flex justify-between">
             <h2 className="text-lg font-semibold">Full Audit Submissions</h2>
@@ -84,6 +105,7 @@ export default function AdminPage() {
             )}
           </div>
         </div>
+
       </div>
     </div>
   );

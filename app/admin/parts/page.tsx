@@ -3,103 +3,110 @@
 import { useEffect, useState } from "react";
 
 export default function AdminPartsPage() {
-  const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [requests, setRequests] = useState<any[]>([]);
+  const [priceInputs, setPriceInputs] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
-    fetch("/api/admin/get-parts")
+    fetch("/api/admin-data?type=parts")
       .then((res) => res.json())
-      .then((res) => {
-        setData(res.data || []);
-        setLoading(false);
-      });
+      .then((data) => setRequests(data.parts || []));
   }, []);
 
-  const updateStatus = async (id: string, status: string) => {
-    await fetch("/api/admin/update-part-status", {
+  async function sendPaymentLink(request: any) {
+    const finalPrice = priceInputs[request.id];
+
+    if (!finalPrice) {
+      alert("Enter a price first.");
+      return;
+    }
+
+    // Create Stripe session
+    const paymentRes = await fetch("/api/create-parts-payment", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, status }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: request.email,
+        amount: finalPrice,
+        requestId: request.id,
+      }),
     });
 
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, status } : item
-      )
-    );
-  };
+    const paymentData = await paymentRes.json();
 
-  if (loading) return <div>Loading...</div>;
+    if (!paymentData.url) {
+      alert("Payment session failed.");
+      return;
+    }
+
+    // Send email with link
+    await fetch("/api/send-payment-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: request.email,
+        link: paymentData.url,
+      }),
+    });
+
+    alert("Payment link sent.");
+  }
 
   return (
-    <div>
-      <h1 className="text-3xl font-extrabold mb-8">
-        Parts Requests
-      </h1>
+    <div className="min-h-screen bg-slate-950 text-white p-10">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold mb-8">Parts Tracker Admin</h1>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
-          <thead>
-            <tr className="border-b bg-slate-50">
-              <th className="p-3 text-left">Customer</th>
-              <th className="p-3 text-left">Vehicle</th>
-              <th className="p-3 text-left">Part</th>
-              <th className="p-3 text-left">Urgency</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left">Date</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {data.map((item) => (
-              <tr key={item.id} className="border-b">
-                <td className="p-3">
-                  {item.name}
-                  <div className="text-xs text-slate-500">
-                    {item.email}
-                  </div>
-                </td>
-
-                <td className="p-3">
-                  {item.year} {item.make} {item.model}
-                  <div className="text-xs text-slate-500">
-                    {item.vin}
-                  </div>
-                </td>
-
-                <td className="p-3 max-w-xs">
-                  {item.part}
-                </td>
-
-                <td className="p-3">
-                  {item.urgency}
-                </td>
-
-                <td className="p-3">
-                  <select
-                    value={item.status}
-                    onChange={(e) =>
-                      updateStatus(item.id, e.target.value)
-                    }
-                    className="border rounded px-2 py-1"
-                  >
-                    <option value="new">New</option>
-                    <option value="reviewing">Reviewing</option>
-                    <option value="invoice_sent">Invoice Sent</option>
-                    <option value="paid">Paid</option>
-                    <option value="completed">Completed</option>
-                  </select>
-                </td>
-
-                <td className="p-3 text-xs">
-                  {new Date(item.created_at).toLocaleDateString()}
-                </td>
+        <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-800 text-slate-300">
+              <tr>
+                <th className="px-6 py-3 text-left">Name</th>
+                <th className="px-6 py-3 text-left">Email</th>
+                <th className="px-6 py-3 text-left">Part</th>
+                <th className="px-6 py-3 text-left">Price</th>
+                <th className="px-6 py-3 text-left">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {requests.map((request) => (
+                <tr key={request.id} className="border-t border-slate-800">
+                  <td className="px-6 py-3">{request.name}</td>
+                  <td className="px-6 py-3">{request.email}</td>
+                  <td className="px-6 py-3">{request.part}</td>
+
+                  <td className="px-6 py-3">
+                    <input
+                      type="number"
+                      placeholder="Enter price"
+                      className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1"
+                      onChange={(e) =>
+                        setPriceInputs({
+                          ...priceInputs,
+                          [request.id]: Number(e.target.value),
+                        })
+                      }
+                    />
+                  </td>
+
+                  <td className="px-6 py-3">
+                    <button
+                      onClick={() => sendPaymentLink(request)}
+                      className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg"
+                    >
+                      Send Payment Link
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {!requests.length && (
+            <div className="p-6 text-slate-400">
+              No parts requests yet.
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
