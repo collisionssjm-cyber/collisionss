@@ -26,8 +26,15 @@ export async function GET(req: Request) {
 
   // 🔹 Default: Fetch Audits
   const { data, error } = await supabase
-    .from("audits")
-    .select("*")
+   const fullAudits = await supabase
+  .from("audits")
+  .select("*")
+  .eq("type", "full");
+
+const questions = await supabase
+  .from("audits")
+  .select("*")
+  .eq("type", "question");
     .order("created_at", { ascending: false });
 
   if (error) {
