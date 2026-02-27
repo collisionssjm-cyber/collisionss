@@ -37,11 +37,6 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white overflow-x-hidden">
 
-      {/* LAUNCH BANNER */}
-      <div className="w-full bg-emerald-600 text-center py-2 text-sm font-medium">
-        🎉 Official Launch — Independent Collision Protection Is Now Live
-      </div>
-
       {/* HEADER */}
       <header className="absolute top-0 left-0 w-full z-30">
         <div className="mx-auto max-w-6xl px-6 py-6">
