@@ -1,112 +1,119 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export default function AdminPage() {
   const [audits, setAudits] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/admin-data")
-      .then((res) => res.json())
-      .then((data) => setAudits(data.audits));
+    fetchData();
   }, []);
 
-  async function updateStatus(id: string, status: string) {
-    const res = await fetch("/api/update-status", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, status }),
-    });
+  async function fetchData() {
+    const { data: auditsData } = await supabase
+      .from("audits")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-    const data = await res.json();
+    const { data: questionsData } = await supabase
+      .from("questions")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-    if (data.error) {
-      alert("Update failed: " + data.error);
-      return;
-    }
+    setAudits(auditsData || []);
+    setQuestions(questionsData || []);
+    setLoading(false);
+  }
 
-    window.location.reload();
+  if (loading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <p>Loading admin dashboard...</p>
+      </main>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-10">
+    <main className="min-h-screen bg-white px-8 py-16">
       <div className="max-w-6xl mx-auto">
 
-        {/* 🔥 Header With Navigation */}
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">
-            Collision SS Admin Dashboard
-          </h1>
+        <h1 className="text-3xl font-bold mb-12">
+          CollisionSS Admin Dashboard
+        </h1>
 
-          <div className="flex gap-4">
-            <a
-              href="/admin"
-              className="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm"
-            >
-              Full Audits
-            </a>
+        {/* AUDITS */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-semibold mb-6">Full Audits</h2>
 
-            <a
-              href="/admin/parts"
-              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm"
-            >
-              Parts Tracker
-            </a>
-          </div>
-        </div>
-
-        {/* 🔥 Audit Table */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-slate-800 flex justify-between">
-            <h2 className="text-lg font-semibold">Full Audit Submissions</h2>
-            <span className="text-sm text-slate-400">
-              {audits.length} total
-            </span>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-slate-800 text-slate-300">
+          <div className="overflow-x-auto border rounded-lg">
+            <table className="min-w-full text-sm">
+              <thead className="bg-slate-100">
                 <tr>
-                  <th className="text-left px-6 py-3">Name</th>
-                  <th className="text-left px-6 py-3">Email</th>
-                  <th className="text-left px-6 py-3">Vehicle</th>
-                  <th className="text-left px-6 py-3">Status</th>
+                  <th className="p-3 text-left">Name</th>
+                  <th className="p-3 text-left">Email</th>
+                  <th className="p-3 text-left">Vehicle</th>
+                  <th className="p-3 text-left">Session ID</th>
+                  <th className="p-3 text-left">Date</th>
                 </tr>
               </thead>
               <tbody>
                 {audits.map((audit) => (
-                  <tr key={audit.id} className="border-t border-slate-800">
-                    <td className="px-6 py-3">{audit.name}</td>
-                    <td className="px-6 py-3">{audit.email}</td>
-                    <td className="px-6 py-3">{audit.vehicle || "-"}</td>
-                    <td className="px-6 py-3">
-                      <select
-                        value={audit.status}
-                        onChange={(e) =>
-                          updateStatus(audit.id, e.target.value)
-                        }
-                        className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1"
-                      >
-                        <option value="paid">Paid</option>
-                        <option value="in_process">In Process</option>
-                        <option value="complete">Complete</option>
-                      </select>
+                  <tr key={audit.id} className="border-t">
+                    <td className="p-3">{audit.name}</td>
+                    <td className="p-3">{audit.email}</td>
+                    <td className="p-3">{audit.vehicle}</td>
+                    <td className="p-3 text-xs">{audit.session_id}</td>
+                    <td className="p-3">
+                      {new Date(audit.created_at).toLocaleString()}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-
-            {!audits.length && (
-              <div className="p-6 text-slate-400">
-                No audit submissions yet.
-              </div>
-            )}
           </div>
-        </div>
+        </section>
+
+        {/* QUESTIONS */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-6">$1 Questions</h2>
+
+          <div className="overflow-x-auto border rounded-lg">
+            <table className="min-w-full text-sm">
+              <thead className="bg-slate-100">
+                <tr>
+                  <th className="p-3 text-left">Name</th>
+                  <th className="p-3 text-left">Email</th>
+                  <th className="p-3 text-left">Question</th>
+                  <th className="p-3 text-left">Session ID</th>
+                  <th className="p-3 text-left">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {questions.map((q) => (
+                  <tr key={q.id} className="border-t">
+                    <td className="p-3">{q.name}</td>
+                    <td className="p-3">{q.email}</td>
+                    <td className="p-3">{q.question}</td>
+                    <td className="p-3 text-xs">{q.session_id}</td>
+                    <td className="p-3">
+                      {new Date(q.created_at).toLocaleString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
       </div>
-    </div>
+    </main>
   );
 }
