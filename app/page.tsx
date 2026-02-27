@@ -39,10 +39,14 @@ export default function Page() {
 
       {/* HEADER */}
       <header className="absolute top-0 left-0 w-full z-30">
-        <div className="mx-auto max-w-6xl px-6 py-6">
-          <div className="text-xl font-extrabold tracking-tight text-white">
-            Collision <span className="text-blue-400">SS</span>
-          </div>
+      <div className="flex flex-col leading-tight">
+  <span className="text-sm italic text-slate-400">
+    Powered by
+  </span>
+  <span className="text-3xl font-black text-white">
+    Collision SS
+  </span>
+</div>
         </div>
       </header>
 
