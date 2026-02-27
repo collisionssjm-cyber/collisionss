@@ -38,15 +38,14 @@ export default function Page() {
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white overflow-x-hidden">
 
       {/* HEADER */}
-      <header className="absolute top-0 left-0 w-full z-30">
-      <div className="flex flex-col leading-tight">
-  <span className="text-sm italic text-slate-400">
-    Powered by
-  </span>
-  <span className="text-3xl font-black text-white">
-    Collision SS
-  </span>
-</div>
+      <header className="absolute top-6 left-8 z-30">
+        <div className="flex flex-col leading-tight">
+          <span className="text-sm italic text-slate-400 tracking-wide">
+            Powered by
+          </span>
+          <span className="text-3xl font-black text-white tracking-tight">
+            Collision SS
+          </span>
         </div>
       </header>
 
